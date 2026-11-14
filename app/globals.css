@@ -1,26 +1,191 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Y2K + Windows 98: tema único (claro). */
 
 @theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-pixel: var(--font-pixelify), monospace;
+  --font-script: var(--font-pinyon), cursive;
+  --font-heading: var(--font-pixelify), monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* paleta da marca */
+  --color-ink: #16122b;
+  --color-ink-soft: #2b2545;
+  --color-ink-muted: #4d4766;
+  --color-violet: #6a2be8;
+  --color-violet-deep: #5b1fd6;
+  --color-violet-mid: #8f63f5;
+  --color-lilac: #ece8f6;
+  --color-lilac-pressed: #d8d0f2;
+  --color-lilac-panel: #f4f2fa;
+  --color-lilac-soft: #e3d8ff;
+  --color-lilac-bg: #f4f0ff;
+  --color-lilac-edge: #c9b8ff;
+  --color-bevel-shade: #9e98b8;
+  --color-lemon: #f4f000;
+  --color-lemon-cream: #fffde0;
+  --color-sky-pale: #e8f6ff;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-float: float 4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --background: #e6d9ff;
+  --foreground: #16122b;
+  --card: #ffffff;
+  --card-foreground: #16122b;
+  --popover: #ffffff;
+  --popover-foreground: #16122b;
+  --primary: #6a2be8;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f000;
+  --secondary-foreground: #16122b;
+  --muted: #ece8f6;
+  --muted-foreground: #4d4766;
+  --accent: #d8d0f2;
+  --accent-foreground: #16122b;
+  --destructive: #c4161c;
+  --border: #16122b;
+  --input: #16122b;
+  --ring: #6a2be8;
+  --radius: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background font-sans text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  a {
+    @apply text-violet hover:text-ink;
+  }
+}
+
+/* Biséis estilo Windows 98: a sombra "dura" (--drop) combina com o chanfro (--bevel). */
+@utility bevel-raised {
+  --bevel: inset -2px -2px 0 var(--color-bevel-shade), inset 2px 2px 0 #fff;
+  box-shadow: var(--bevel), var(--drop, 0 0 #0000);
+}
+@utility bevel-pressed {
+  --bevel: inset 2px 2px 0 var(--color-bevel-shade), inset -2px -2px 0 #fff;
+  box-shadow: var(--bevel), var(--drop, 0 0 #0000);
+}
+@utility bevel-violet {
+  --bevel: inset -2px -2px 0 #3e1394, inset 2px 2px 0 #b596ff;
+  box-shadow: var(--bevel), var(--drop, 0 0 #0000);
+}
+@utility bevel-violet-pressed {
+  --bevel: inset 2px 2px 0 #3e1394, inset -2px -2px 0 #b596ff;
+  box-shadow: var(--bevel), var(--drop, 0 0 #0000);
+}
+@utility bevel-lemon {
+  --bevel: inset -2px -2px 0 #a8a300, inset 2px 2px 0 #ffffa6;
+  box-shadow: var(--bevel), var(--drop, 0 0 #0000);
+}
+@utility drop-sm {
+  --drop: 4px 4px 0 var(--color-ink);
+  box-shadow: var(--bevel, 0 0 #0000), var(--drop);
+}
+@utility drop-md {
+  --drop: 5px 5px 0 var(--color-ink);
+  box-shadow: var(--bevel, 0 0 #0000), var(--drop);
+}
+@utility drop-lg {
+  --drop: 8px 8px 0 var(--color-ink);
+  box-shadow: var(--bevel, 0 0 #0000), var(--drop);
+}
+
+/* Fundos */
+@utility bg-checker {
+  background: repeating-conic-gradient(#e2e9ff 0 25%, #f6f8ff 0 50%) 0 0 / 120px 120px;
+}
+@utility bg-clouds {
+  background:
+    radial-gradient(ellipse 38% 16% at 12% 14%, rgb(255 255 255 / 0.95) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 12% at 82% 22%, rgb(255 255 255 / 0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 42% 14% at 60% 52%, rgb(255 255 255 / 0.85) 0%, transparent 70%),
+    radial-gradient(ellipse 34% 12% at 18% 78%, rgb(255 255 255 / 0.85) 0%, transparent 70%),
+    linear-gradient(180deg, #9ec5ff 0%, #c7dcff 45%, #e6d9ff 100%);
+}
+@utility bg-clouds-violet {
+  background:
+    radial-gradient(ellipse 40% 18% at 10% 10%, rgb(255 255 255 / 0.95) 0%, transparent 70%),
+    radial-gradient(ellipse 36% 14% at 88% 30%, rgb(255 255 255 / 0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 14% at 30% 80%, rgb(255 255 255 / 0.85) 0%, transparent 70%),
+    linear-gradient(160deg, #e9ddff 0%, #f7f2ff 40%, #c9b0ff 100%);
+}
+@utility bg-side-glow {
+  background: linear-gradient(90deg, #d9c8ff 0%, #f6f2ff 30%, #f6f2ff 62%, #a77bff 100%);
+}
+@utility bg-titlebar {
+  background: linear-gradient(90deg, #5b1fd6 0%, #8f63f5 55%, #c9b8ff 100%);
+}
+@utility bg-titlebar-card {
+  background: linear-gradient(90deg, #5b1fd6, #a88bff);
+}
+@utility bg-placeholder-lilac {
+  background: repeating-conic-gradient(#e3d8ff 0 25%, #f4f0ff 0 50%) 0 0 / 28px 28px;
+}
+@utility bg-placeholder-sky {
+  background: repeating-conic-gradient(#cdebff 0 25%, #eef8ff 0 50%) 0 0 / 28px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float {
+    animation: none;
+  }
 }
