@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 }
 
 const duvidas = [
-  { q: "Quanto tempo demora?", a: "[Prazo médio de produção.]" },
-  { q: "Vocês enviam?", a: "[Cidades atendidas, frete ou ponto de retirada.]" },
-  { q: "Posso escolher qualquer cor?", a: "Sim, entre as cores disponíveis do material. Se quiser outra, me chama que eu vejo." },
+  { q: "Quanto tempo demora?", a: "Geralmente entre 2 e 5 dias úteis, mas varia conforme o tamanho da peça e a fila do momento. Antes de fechar, eu te confirmo o prazo do seu pedido." },
+  { q: "Vocês enviam?", a: "Estou em Goiânia! Pra quem mora aqui, envio por Uber Flash ou a gente combina um ponto de encontro pra retirada." },
+  { q: "Posso escolher qualquer cor?", a: "Sim, entre as cores disponíveis do material." },
 ]
 
 function CorItem({ nome, hex }: { nome: string; hex: string }) {
@@ -37,7 +37,7 @@ export default function SobrePage() {
               <span className="font-pixel text-[clamp(30px,3.4vw,42px)] leading-[1.1] font-bold">A MENTE POR TRÁS DA YASTECH.3D</span>
             </h1>
             <p className="text-lg leading-[1.65] text-ink-soft">
-              [Conte aqui sua história: como começou com impressão 3D, o que você ama criar e o que deixa a YasTech diferente.]
+              Sou desenvolvedora de software e sempre fui fascinada por tecnologia, de todos os tipos. A impressão 3D entrou nessa lista quando comprei minha primeira impressora, só por hobby. Comecei imprimindo coisinhas pra facilitar meu dia a dia, e não demorou pros meus amigos começarem a pedir as deles também. Foi assim que nasceu a YasTech.3D.
             </p>
             <p className="text-lg leading-[1.65] text-ink-soft">Cada peça é impressa sob encomenda, camada por camada, na cor que você escolher.</p>
             <Button size="lg" variant="secondary" className="drop-sm self-start" nativeButton={false} render={<a href={INSTAGRAM_PERFIL} />}>
