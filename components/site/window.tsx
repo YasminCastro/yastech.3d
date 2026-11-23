@@ -26,7 +26,7 @@ export function Window({
   return (
     <section className={cn("border-2 border-ink bg-lilac-panel bevel-raised", className)} {...rest}>
       <div className={cn("flex h-[38px] items-center justify-between border-b-2 border-ink bg-titlebar pr-1.5 pl-3.5", barClassName)}>
-        <span className="font-pixel text-base text-white">{title}</span>
+        <span className="min-w-0 truncate font-pixel text-base text-white">{title}</span>
         {keys.length > 0 && (
           <div aria-hidden="true" className="flex gap-1">
             {keys.map((k) => (

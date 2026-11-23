@@ -40,12 +40,14 @@ function Grupo<T extends string>({
   return (
     <div role="group" aria-labelledby={id} className="flex flex-col gap-2">
       <span id={id} className="font-pixel text-lg font-bold">{titulo}</span>
-      {opcoes.map((o) => (
-        <Toggle key={o.id} variant="bevel" size="touch" pressed={valor === o.id} onPressedChange={() => onChange(o.id)}>
-          <span>{o.label}</span>
-          {o.count !== undefined && <span className="text-[13px] opacity-85">{o.count}</span>}
-        </Toggle>
-      ))}
+      <div className="flex flex-wrap gap-2 lg:flex-col">
+        {opcoes.map((o) => (
+          <Toggle key={o.id} variant="bevel" size="touch" className="max-lg:w-auto max-lg:px-3 max-lg:text-[15px]" pressed={valor === o.id} onPressedChange={() => onChange(o.id)}>
+            <span>{o.label}</span>
+            {o.count !== undefined && <span className="text-[13px] opacity-85">{o.count}</span>}
+          </Toggle>
+        ))}
+      </div>
     </div>
   )
 }
@@ -54,6 +56,8 @@ export function CatalogBrowser({ produtos }: { produtos: Produto[] }) {
   const [cat, setCat] = useState<Cat>("todas")
   const [faixa, setFaixa] = useState<Faixa>("todas")
   const [ordem, setOrdem] = useState<Ordem>("padrao")
+  const [filtrosAbertos, setFiltrosAbertos] = useState(false)
+  const ativos = Number(cat !== "todas") + Number(faixa !== "todas") + Number(ordem !== "padrao")
 
   const lista = useMemo(() => {
     const teste = faixas.find((f) => f.id === faixa)!.teste
@@ -70,20 +74,38 @@ export function CatalogBrowser({ produtos }: { produtos: Produto[] }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-end justify-between gap-4">
+      <div className="flex flex-wrap items-end justify-between gap-3 sm:gap-4">
         <div className="flex flex-col gap-1">
           <nav aria-label="Você está em" className="font-pixel text-[15px] text-ink-muted">
             <Link href="/" className="text-ink-muted">C:\Início</Link> \ Catálogo
           </nav>
-          <h1 className="font-script text-[clamp(64px,8vw,104px)] leading-none font-normal">Catálogo</h1>
+          <h1 className="font-script text-[clamp(56px,16vw,64px)] leading-none font-normal sm:text-[clamp(64px,8vw,104px)]">Catálogo</h1>
         </div>
-        <span aria-live="polite" className="border-2 border-ink bg-white px-3 py-1.5 font-pixel text-lg">
+        <span aria-live="polite" className="border-2 border-ink bg-white px-3 py-1.5 font-pixel text-base sm:text-lg">
           {lista.length === 1 ? "1 produto" : `${lista.length} produtos`}
         </span>
       </div>
 
-      <div className="flex flex-wrap items-start gap-8">
-        <Window title="filtros.exe" controls="min-close" aria-label="Filtros" className="flex-[1_1_260px] drop-md max-w-full" barClassName="h-9" bodyClassName="flex flex-col gap-6 p-5">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-8">
+        <Button
+          variant="outline"
+          className="justify-between lg:hidden"
+          aria-expanded={filtrosAbertos}
+          aria-controls="filtros"
+          onClick={() => setFiltrosAbertos((v) => !v)}
+        >
+          <span>Filtros{ativos > 0 && ` (${ativos})`}</span>
+          <span aria-hidden="true">{filtrosAbertos ? "▲" : "▼"}</span>
+        </Button>
+        <Window
+          id="filtros"
+          title="filtros.exe"
+          controls="min-close"
+          aria-label="Filtros"
+          className={`max-w-full drop-md lg:block lg:w-[260px] lg:flex-none ${filtrosAbertos ? "" : "max-lg:hidden"}`}
+          barClassName="h-9"
+          bodyClassName="flex flex-col gap-5 p-4 lg:gap-6 lg:p-5"
+        >
           <Grupo titulo="Categoria" opcoes={opcoesCat} valor={cat} onChange={setCat} />
           <Grupo titulo="Preço" opcoes={faixas} valor={faixa} onChange={setFaixa} />
           <Grupo titulo="Ordenar" opcoes={ordens} valor={ordem} onChange={setOrdem} />
@@ -99,14 +121,14 @@ export function CatalogBrowser({ produtos }: { produtos: Produto[] }) {
           </Button>
         </Window>
 
-        <section aria-label="Produtos" className="min-w-0 flex-[999_1_560px]">
+        <section aria-label="Produtos" className="min-w-0 flex-1">
           {lista.length === 0 && (
             <div className="flex flex-col items-center gap-3 border-2 border-ink bg-white px-6 py-14 text-center">
               <span className="font-pixel text-2xl">Nenhum produto encontrado</span>
               <span className="text-ink-muted">Tente outra categoria ou faixa de preço.</span>
             </div>
           )}
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-7">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] sm:gap-7">
             {lista.map((p, i) => (
               <ProductCard key={p.slug} produto={p} eager={i < 4} />
             ))}

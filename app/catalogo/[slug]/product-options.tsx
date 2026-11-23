@@ -12,22 +12,22 @@ export function Galeria({ fotos }: { fotos: Produto["fotos"] }) {
   const [i, setI] = useState(0)
   const atual = fotos[i]
   return (
-    <Window title={atual.nome} className="min-w-0 drop-lg" bodyClassName="flex flex-col gap-4 p-[18px]" aria-label="Fotos do produto">
+    <Window title={atual.nome} className="min-w-0 drop-lg" bodyClassName="flex flex-col gap-3 p-3 sm:gap-4 sm:p-[18px]" aria-label="Fotos do produto">
       <div className="relative aspect-square overflow-hidden border-2 border-ink bg-white">
         <Image src={atual.src} alt={atual.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" className="object-cover" />
       </div>
       {fotos.length > 1 && (
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {fotos.map((f, idx) => (
             <Toggle
               key={f.src}
               pressed={i === idx}
               onPressedChange={() => setI(idx)}
               aria-label={f.alt}
-              className="relative size-24 overflow-hidden border-2 border-ink bg-white p-0 opacity-75 aria-pressed:opacity-100 aria-pressed:shadow-[0_0_0_3px_var(--color-violet)]"
+              className="relative size-16 overflow-hidden sm:size-24 border-2 border-ink bg-white p-0 opacity-75 aria-pressed:opacity-100 aria-pressed:shadow-[0_0_0_3px_var(--color-violet)]"
             >
               {/* eager: miniatura compartilha a src da foto principal; se ficasse lazy, o Next acusaria falso alerta de LCP */}
-              <Image src={f.src} alt="" fill sizes="96px" loading="eager" className="object-cover" />
+              <Image src={f.src} alt="" fill sizes="(min-width: 640px) 96px, 64px" loading="eager" className="object-cover" />
             </Toggle>
           ))}
         </div>
@@ -51,7 +51,7 @@ export function ProdutoDetalhe({ produto, foto, children }: { produto: Produto; 
   const mensagem = `Oi! Quero o ${produto.tag.toLowerCase()} ${produto.nome} na cor ${cor} (${material}).`
 
   return (
-    <div className="flex flex-wrap items-start gap-10">
+    <div className="flex flex-wrap items-start gap-8 sm:gap-10">
       <div className="flex min-w-0 flex-[1_1_440px] flex-col gap-5">
       {foto}
       <Window title="cores_disponiveis.exe" controls="none" barClassName="h-[30px]" bodyClassName="flex flex-col gap-3 p-3.5">
@@ -83,10 +83,10 @@ export function ProdutoDetalhe({ produto, foto, children }: { produto: Produto; 
       </Window>
       </div>
 
-      <section aria-labelledby="prod-t" className="flex min-w-0 flex-[1_1_420px] flex-col gap-[22px]">
+      <section aria-labelledby="prod-t" className="flex min-w-0 flex-[1_1_420px] flex-col gap-4 sm:gap-[22px]">
       {children}
 
-      <Button size="2xl" className="drop-md" nativeButton={false} render={<a href={INSTAGRAM_DM} />}>
+      <Button size="2xl" className="drop-md max-sm:min-h-14 max-sm:px-4 max-sm:text-xl" nativeButton={false} render={<a href={INSTAGRAM_DM} />}>
         <InstagramIcon className="size-[22px]" />
         Pedir no Instagram
       </Button>
