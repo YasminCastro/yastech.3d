@@ -1,0 +1,145 @@
+[
+  {
+    "slug": "lego",
+    "file": "lego.jpg",
+    "nome": "Lego",
+    "cat": "capinhas",
+    "tag": "CAPINHA",
+    "sub": "Capinha de isqueiro · Mini BIC",
+    "preco": 9,
+    "fotos": [
+      {
+        "src": "/img/lego.jpg",
+        "alt": "Capinha de isqueiro Lego",
+        "nome": "lego.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "dragao",
+    "file": "dragao.jpg",
+    "nome": "Dragão",
+    "cat": "capinhas",
+    "tag": "CAPINHA",
+    "sub": "Capinha de isqueiro · BIC Grande",
+    "preco": 10,
+    "fotos": [
+      {
+        "src": "/img/dragao.jpg",
+        "alt": "Capinha de isqueiro Dragão",
+        "nome": "dragao.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "panico",
+    "file": "panico.jpg",
+    "nome": "Pânico",
+    "cat": "capinhas",
+    "tag": "CAPINHA",
+    "sub": "Capinha de isqueiro · BIC Grande",
+    "preco": 10,
+    "fotos": [
+      {
+        "src": "/img/panico.jpg",
+        "alt": "Capinha de isqueiro Pânico",
+        "nome": "panico.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "anti-rato",
+    "file": "anti_rato.jpg",
+    "nome": "Anti Rato",
+    "cat": "capinhas",
+    "tag": "CAPINHA",
+    "sub": "Capinha de isqueiro · BIC",
+    "preco": 10,
+    "fotos": [
+      {
+        "src": "/img/anti-rato.jpg",
+        "alt": "Capinha de isqueiro Anti Rato",
+        "nome": "anti_rato.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "unicornio",
+    "file": "unicornio.jpg",
+    "nome": "Unicórnio",
+    "cat": "chaveiros",
+    "tag": "CHAVEIRO",
+    "sub": "Chaveiro · PLA",
+    "preco": 15,
+    "apelido": "fofinho e sentadinho",
+    "descricao": "Chaveiro de unicórnio impresso em 3D, com argola de metal. Cada peça é feita sob encomenda na cor que você escolher.",
+    "fotos": [
+      {
+        "src": "/img/unicornio-rosa.jpg",
+        "alt": "Chaveiro unicórnio rosa",
+        "nome": "unicornio_rosa.jpg"
+      },
+      {
+        "src": "/img/unicornio-verde.jpg",
+        "alt": "Chaveiro unicórnio verde",
+        "nome": "unicornio_verde.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "cachorro-balao",
+    "file": "cachorro.jpg",
+    "nome": "Cachorro Balão",
+    "cat": "chaveiros",
+    "tag": "CHAVEIRO",
+    "sub": "Chaveiro · PLA",
+    "preco": 15,
+    "fotos": [
+      {
+        "src": "/img/cachorro-balao.jpg",
+        "alt": "Chaveiro cachorro balão",
+        "nome": "cachorro.jpg"
+      }
+    ]
+  },
+  {
+    "slug": "porta-cigarro-liso",
+    "file": "porta_liso.jpg",
+    "nome": "Porta Cigarro Liso",
+    "cat": "porta",
+    "tag": "PORTA CIGARRO",
+    "sub": "Porta cigarro · PLA",
+    "preco": 25,
+    "fotos": []
+  },
+  {
+    "slug": "porta-cigarro-xadrez",
+    "file": "porta_xadrez.jpg",
+    "nome": "Porta Cigarro Xadrez",
+    "cat": "porta",
+    "tag": "PORTA CIGARRO",
+    "sub": "Porta cigarro · PLA",
+    "preco": 28,
+    "fotos": []
+  },
+  {
+    "slug": "suporte-de-celular",
+    "file": "suporte.jpg",
+    "nome": "Suporte de Celular",
+    "cat": "aleatorios",
+    "tag": "ALEATÓRIO",
+    "sub": "Aleatório · PLA",
+    "preco": 18,
+    "fotos": []
+  },
+  {
+    "slug": "mini-vaso",
+    "file": "mini_vaso.jpg",
+    "nome": "Mini Vaso",
+    "cat": "aleatorios",
+    "tag": "ALEATÓRIO",
+    "sub": "Aleatório · PLA",
+    "preco": 20,
+    "fotos": []
+  }
+]

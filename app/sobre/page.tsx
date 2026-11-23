@@ -6,16 +6,9 @@ import { Window } from "@/components/site/window"
 import { INSTAGRAM_PERFIL, materiais } from "@/lib/produtos"
 
 export const metadata: Metadata = {
-  title: "Sobre e Encomendas",
-  description: "Conheça a Yas, a mente por trás da YasTech.3D, e veja como fazer uma encomenda personalizada.",
+  title: "Sobre",
+  description: "Conheça a Yas, a mente por trás da YasTech.3D, e veja as cores disponíveis.",
 }
-
-const etapas = [
-  { n: "01", titulo: "Manda sua ideia", texto: "Foto de referência, desenho ou link do modelo, direto na DM." },
-  { n: "02", titulo: "Orçamento", texto: "Te passo valor, cores possíveis e prazo." },
-  { n: "03", titulo: "Pagamento", texto: "[Formas de pagamento: Pix, sinal de X%...]" },
-  { n: "04", titulo: "Impressão e entrega", texto: "[Prazo médio e se é retirada ou envio.]" },
-]
 
 const duvidas = [
   { q: "Quanto tempo demora?", a: "[Prazo médio de produção.]" },
@@ -61,23 +54,6 @@ export default function SobrePage() {
             <Sparkle id="ssS" to="#5B1FD6" className="absolute top-0 right-0 size-[60px] animate-float" />
           </div>
         </div>
-
-        {/* ENCOMENDAS */}
-        <section aria-labelledby="enc-t" className="flex flex-col gap-6">
-          <h2 id="enc-t" className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="font-script text-[clamp(56px,6vw,84px)] leading-none font-normal">Encomendas</span>
-            <span className="border-2 border-ink bg-lemon px-3 py-0.5 font-pixel text-2xl font-bold">PERSONALIZADAS</span>
-          </h2>
-          <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-5 p-0">
-            {etapas.map((e) => (
-              <li key={e.n} className="flex flex-col gap-2.5 border-2 border-ink bg-white p-[22px] drop-md">
-                <span className="font-pixel text-[44px] leading-none font-bold text-violet">{e.n}</span>
-                <span className="font-pixel text-[21px] font-semibold">{e.titulo}</span>
-                <span className="text-base leading-normal text-ink-soft">{e.texto}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
 
         {/* CORES */}
         <Window title="cores_disponiveis.exe" aria-labelledby="cores-t" className="drop-lg" bodyClassName="flex flex-col gap-6 p-[clamp(24px,4vw,44px)]">

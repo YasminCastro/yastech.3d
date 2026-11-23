@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button"
 import { FolderIcon, HeartY2K, InstagramIcon, Sparkle, SparkleSolid } from "@/components/site/icons"
 import { ProductCard } from "@/components/site/product-card"
 import { Window } from "@/components/site/window"
-import { INSTAGRAM_DM, categorias, produtos } from "@/lib/produtos"
-
-const contagem = (id: string) => produtos.filter((p) => p.cat === id).length
+import { INSTAGRAM_DM, categorias } from "@/lib/produtos"
+import { getProdutos } from "@/lib/store"
 
 const capas: Record<string, { img?: string; fundo: string; icone?: "pasta" | "brilho" }> = {
   capinhas: { img: "/img/lego.jpg", fundo: "bg-lilac-soft" },
@@ -18,11 +17,14 @@ const capas: Record<string, { img?: string; fundo: string; icone?: "pasta" | "br
 const passos = [
   { n: "01", titulo: "Escolha no catálogo", texto: "Veja os modelos, tamanhos e as cores disponíveis de cada peça.", fundo: "bg-lilac-bg" },
   { n: "02", titulo: "Chama no Insta", texto: "Manda na DM o nome do produto e a cor que você quer.", fundo: "bg-lemon-cream" },
-  { n: "03", titulo: "Imprimo pra você", texto: "Sua peça é impressa sob encomenda. Prazo: [X dias úteis].", fundo: "bg-sky-pale" },
+  { n: "03", titulo: "Imprimo pra você", texto: "Sua peça é impressa sob encomenda.", fundo: "bg-sky-pale" },
 ]
 
-export default function Home() {
-  const novidades = ["unicornio", "cachorro-balao", "lego", "panico"].map((s) => produtos.find((p) => p.slug === s)!)
+export default async function Home() {
+  const produtos = await getProdutos()
+  const contagem = (id: string) => produtos.filter((p) => p.cat === id).length
+  const destaques = ["unicornio", "cachorro-balao", "lego", "panico"].flatMap((s) => produtos.find((p) => p.slug === s) ?? [])
+  const novidades = destaques.length === 4 ? destaques : produtos.slice(0, 4)
 
   return (
     <main className="bg-clouds flex-1">
@@ -44,9 +46,6 @@ export default function Home() {
               <div className="mt-1 flex flex-wrap gap-3.5">
                 <Button size="xl" className="drop-sm" nativeButton={false} render={<Link href="/catalogo" />}>
                   Ver catálogo →
-                </Button>
-                <Button size="xl" variant="secondary" className="drop-sm" nativeButton={false} render={<Link href="/sobre" />}>
-                  Encomenda personalizada
                 </Button>
               </div>
             </div>
@@ -135,8 +134,8 @@ export default function Home() {
             <Image src="/img/yas.jpg" alt="Avatar da Yasmin, dona da YasTech.3D" fill sizes="150px" className="object-cover" />
           </div>
           <div className="flex min-w-0 flex-[1_1_360px] flex-col gap-2.5">
-            <h2 id="cta-t" className="font-pixel text-[clamp(30px,3.6vw,44px)] leading-[1.05] font-bold">Quer algo que não está aqui?</h2>
-            <p className="text-lg leading-normal text-[#DCD6F2]">Faço peças personalizadas. Me manda sua ideia no Instagram que a gente vê juntos.</p>
+            <h2 id="cta-t" className="font-pixel text-[clamp(30px,3.6vw,44px)] leading-[1.05] font-bold">Ficou com alguma dúvida?</h2>
+            <p className="text-lg leading-normal text-[#DCD6F2]">Me chama no Instagram que eu te ajudo a escolher sua peça.</p>
           </div>
           <Button size="xl" variant="secondary" className="border-white shadow-[4px_4px_0_var(--color-violet)]" nativeButton={false} render={<a href={INSTAGRAM_DM} />}>
             <InstagramIcon className="size-5" />

@@ -5,24 +5,25 @@ import { Badge } from "@/components/ui/badge"
 import { FolderIcon } from "@/components/site/icons"
 import { ProductCard } from "@/components/site/product-card"
 import { Window } from "@/components/site/window"
-import { categorias, formatarPreco, getProduto, produtos } from "@/lib/produtos"
+import { categorias, formatarPreco } from "@/lib/produtos"
+import { getProduto, getProdutos } from "@/lib/store"
 import { Galeria, Opcoes } from "./product-options"
 
 type Props = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return produtos.map((p) => ({ slug: p.slug }))
+export async function generateStaticParams() {
+  return (await getProdutos()).map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const p = getProduto(slug)
+  const p = await getProduto(slug)
   return p ? { title: p.nome, description: `${p.tag} ${p.nome} impresso em 3D sob encomenda.` } : {}
 }
 
 export default async function ProdutoPage({ params }: Props) {
   const { slug } = await params
-  const produto = getProduto(slug)
+  const [produto, produtos] = await Promise.all([getProduto(slug), getProdutos()])
   if (!produto) notFound()
 
   const categoria = categorias.find((c) => c.id === produto.cat)!

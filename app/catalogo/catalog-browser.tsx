@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Toggle } from "@/components/ui/toggle"
 import { ProductCard } from "@/components/site/product-card"
 import { Window } from "@/components/site/window"
-import { categorias, produtos, type CategoriaId } from "@/lib/produtos"
+import { categorias, type CategoriaId, type Produto } from "@/lib/produtos"
 
 type Cat = CategoriaId | "todas"
 type Faixa = "todas" | "ate10" | "10a20" | "mais20"
@@ -50,7 +50,7 @@ function Grupo<T extends string>({
   )
 }
 
-export function CatalogBrowser() {
+export function CatalogBrowser({ produtos }: { produtos: Produto[] }) {
   const [cat, setCat] = useState<Cat>("todas")
   const [faixa, setFaixa] = useState<Faixa>("todas")
   const [ordem, setOrdem] = useState<Ordem>("padrao")
@@ -61,7 +61,7 @@ export function CatalogBrowser() {
     if (ordem === "menor") r.sort((a, b) => a.preco - b.preco)
     if (ordem === "maior") r.sort((a, b) => b.preco - a.preco)
     return r
-  }, [cat, faixa, ordem])
+  }, [produtos, cat, faixa, ordem])
 
   const opcoesCat = [
     { id: "todas" as Cat, label: "Todas", count: produtos.length },
