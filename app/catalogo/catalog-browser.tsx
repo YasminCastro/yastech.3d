@@ -107,8 +107,8 @@ export function CatalogBrowser({ produtos }: { produtos: Produto[] }) {
             </div>
           )}
           <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-7">
-            {lista.map((p) => (
-              <ProductCard key={p.slug} produto={p} />
+            {lista.map((p, i) => (
+              <ProductCard key={p.slug} produto={p} eager={i < 4} />
             ))}
           </div>
         </section>

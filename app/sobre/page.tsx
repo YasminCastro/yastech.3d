@@ -3,7 +3,8 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ColorStar, HeartY2K, InstagramIcon, Sparkle } from "@/components/site/icons"
 import { Window } from "@/components/site/window"
-import { INSTAGRAM_PERFIL, materiais } from "@/lib/produtos"
+import { INSTAGRAM_PERFIL, type Cor } from "@/lib/produtos"
+import { getCores } from "@/lib/store"
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -16,16 +17,19 @@ const duvidas = [
   { q: "Posso escolher qualquer cor?", a: "Sim, entre as cores disponíveis do material." },
 ]
 
-function CorItem({ nome, hex }: { nome: string; hex: string }) {
+function CorItem({ nome, hex, hex2 }: Cor) {
   return (
     <li className="flex min-h-[52px] items-center gap-3 border-2 border-ink bg-white px-3.5 font-pixel text-[17px]">
-      <ColorStar hex={hex} className="size-[30px]" />
+      <ColorStar hex={hex} hex2={hex2} className="size-[30px]" />
       {nome}
     </li>
   )
 }
 
-export default function SobrePage() {
+export default async function SobrePage() {
+  const cores = await getCores()
+  const pla = cores.filter((c) => c.material === "PLA")
+  const petg = cores.filter((c) => c.material === "PETG")
   return (
     <main className="bg-side-glow flex-1">
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-16 px-[clamp(16px,4vw,56px)] pt-12 pb-24">
@@ -48,7 +52,7 @@ export default function SobrePage() {
 
           <div className="relative mx-auto flex min-w-0 flex-[0_1_400px] justify-center p-5">
             <div className="relative aspect-[340/420] w-[340px] max-w-full overflow-hidden rounded-t-[170px] rounded-b-md border-2 border-ink shadow-[0_0_0_8px_#fff,0_0_50px_20px_rgb(110_220_255/0.7)]">
-              <Image src="/img/yas.jpg" alt="Avatar ilustrado da Yasmin com fones de ouvido e camiseta YasTech" fill sizes="340px" priority className="object-cover" />
+              <Image src="/img/yas.jpg" alt="Avatar ilustrado da Yasmin com fones de ouvido e camiseta YasTech" fill sizes="340px" loading="eager" className="object-cover" />
             </div>
             <HeartY2K id="hhS" className="absolute bottom-0 -left-1.5 h-[92px] w-[100px] animate-float" />
             <Sparkle id="ssS" to="#5B1FD6" className="absolute top-0 right-0 size-[60px] animate-float" />
@@ -62,7 +66,7 @@ export default function SobrePage() {
             <div className="flex min-w-0 flex-[2_1_420px] flex-col gap-3.5">
               <h3 className="font-pixel text-2xl font-bold">PLA</h3>
               <ul className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-2.5 p-0">
-                {materiais.PLA.map((c) => (
+                {pla.map((c) => (
                   <CorItem key={c.nome} {...c} />
                 ))}
               </ul>
@@ -70,7 +74,7 @@ export default function SobrePage() {
             <div className="flex min-w-0 flex-[1_1_220px] flex-col gap-3.5">
               <h3 className="font-pixel text-2xl font-bold">PETG</h3>
               <ul className="m-0 grid list-none gap-2.5 p-0">
-                {materiais.PETG.map((c) => (
+                {petg.map((c) => (
                   <CorItem key={c.nome} {...c} />
                 ))}
               </ul>

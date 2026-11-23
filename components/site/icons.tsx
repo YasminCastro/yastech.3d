@@ -61,10 +61,20 @@ export function FolderIcon({ className }: { className?: string }) {
   )
 }
 
-export function ColorStar({ hex, className }: { hex: string; className?: string }) {
+export function ColorStar({ hex, hex2, className }: { hex: string; hex2?: string | null; className?: string }) {
+  // Duo color: estrela dividida na diagonal. O id deriva das cores, então repetições geram o mesmo gradiente.
+  const id = hex2 ? `duo-${hex.slice(1)}-${hex2.slice(1)}` : undefined
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
-      <path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6l-6.4 3.5L7 14l-5.3-5 7.2-.9z" fill={hex} stroke="#16122B" strokeWidth="1.4" strokeLinejoin="round" />
+      {id && (
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="50%" stopColor={hex} />
+            <stop offset="50%" stopColor={hex2!} />
+          </linearGradient>
+        </defs>
+      )}
+      <path d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6l-6.4 3.5L7 14l-5.3-5 7.2-.9z" fill={id ? `url(#${id})` : hex} stroke="#16122B" strokeWidth="1.4" strokeLinejoin="round" />
     </svg>
   )
 }

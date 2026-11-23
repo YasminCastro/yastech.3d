@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { FolderIcon } from "@/components/site/icons"
 import { formatarPreco, type Produto } from "@/lib/produtos"
 
-export function ProductCard({ produto, priority }: { produto: Produto; priority?: boolean }) {
+export function ProductCard({ produto, eager }: { produto: Produto; eager?: boolean }) {
   const foto = produto.fotos[0]
   return (
     <Link
@@ -17,7 +17,7 @@ export function ProductCard({ produto, priority }: { produto: Produto; priority?
       </div>
       <div className="relative aspect-[4/5] overflow-hidden bg-white">
         {foto ? (
-          <Image src={foto.src} alt={foto.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" priority={priority} className="object-cover" />
+          <Image src={foto.src} alt={foto.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" loading={eager ? "eager" : "lazy"} className="object-cover" />
         ) : (
           <div className="flex size-full flex-col items-center justify-center gap-2.5 bg-placeholder-lilac">
             <FolderIcon className="h-[46px] w-14" />

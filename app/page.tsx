@@ -52,7 +52,7 @@ export default async function Home() {
 
             <div aria-hidden="true" className="relative h-[480px] min-w-0 flex-[1_1_380px]">
               <div className="absolute top-5 left-[8%] size-[340px] max-w-[80%] overflow-hidden rounded-full border-2 border-ink bg-white shadow-[0_0_0_10px_#E3D8FF,0_0_50px_18px_rgb(155_120_255/0.55)]">
-                <Image src="/img/unicornio-rosa.jpg" alt="" fill sizes="340px" priority className="object-cover" />
+                <Image src="/img/unicornio-rosa.jpg" alt="" fill sizes="340px" loading="eager" className="object-cover" />
               </div>
               <div className="absolute right-[2%] bottom-2.5 size-[210px] overflow-hidden rounded-full border-2 border-ink bg-white shadow-[0_0_0_8px_#CDEBFF,0_0_40px_12px_rgb(120_200_255/0.6)]">
                 <Image src="/img/hero-2.jpg" alt="" fill sizes="210px" className="object-cover" />

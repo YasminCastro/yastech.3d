@@ -14,6 +14,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = usePathname()
+  if (pathname.startsWith("/studio")) return null
   const ativo = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
